@@ -1,0 +1,46 @@
+; Chloe Duncan
+; 25 February 2022
+; TCSS 371, Professor Fowler
+; 
+; PrintLetters Maching Code Program
+; Prints letters ZYX...CBAABC...XYZ
+
+0011 0000 0000 0000  ; Store start address x3000
+
+0010 010 000010101   ; LD ASCII Z in R2
+0010 011 000010101   ; LD counter in R3
+
+0000 001 000000000   ; BRp go to next line ; print chars
+
+; Reverse Print Alphabet
+0101 000 000 1 00000 ; AND (R0 <- R0 ^ 0)  ; clear R0
+0001 000 010 1 00000 ; ADD (R0 <- R2 + 0)  ; add char in R2 to R0  
+1111 0000 00100001   ; TRAP x21 : OUT      ; print char in R0 
+0001 010 010 1 11111 ; ADD (R2 <- R2 - 1)  ; decrement char
+0001 011 011 1 11111 ; ADD (R3 <- R3 - 1)  ; decrement counter
+
+0000 001 111111010   ; BRp go back to top of Reverse Print loop
+
+0000 010 000000000   ; BRz go to next loop ; resets counter
+
+; Reset Counter
+0101 011 011 1 00000 ; AND (R3 <- R3 ^ 0)  ; clear R3
+0010 011 000001011   ; LD counter in R3
+0001 010 010 1 00001 ; ADD (R2 <- R2 + 1)  ; offset for reverse print
+0000 111 000000000   ; BR unconditional to reverse print
+
+; Print Alphabet
+0101 000 000 1 00000 ; AND (R0 <- R0 ^ 0)  ; clear R0
+0001 000 010 1 00000 ; ADD (R0 <- R2 + 0)  ; add char in R2 to R0
+1111 0000 00100001   ; TRAP x21 : OUT      ; print char in R0
+0001 010 010 1 00001 ; ADD (R2 <- R2 + 1)  ; increment char
+0001 011 011 1 11111 ; ADD (R3 <- R3 - 1)  ; decrement counter
+
+0000 001 111111010   ; BRp go back to top of print loop
+
+0000 110000000000    ; BRnz go to next line
+
+1111 0000 0010 0101  ; HALT x25
+
+0000 0000 0101 1010  ; ASCII Z x90
+0000 0000 0001 1010  ; #26 counter
