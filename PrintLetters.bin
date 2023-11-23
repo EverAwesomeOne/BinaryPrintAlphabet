@@ -1,4 +1,4 @@
- ; PrintLetters Maching Code Program
+; PrintLetters Maching Code Program
 ; Prints letters ZYX...CBAABC...XYZ
 
 0011 0000 0000 0000  ; Store start address x3000
