@@ -1,8 +1,4 @@
-; Chloe Duncan
-; 25 February 2022
-; TCSS 371, Professor Fowler
-; 
-; PrintLetters Maching Code Program
+ ; PrintLetters Maching Code Program
 ; Prints letters ZYX...CBAABC...XYZ
 
 0011 0000 0000 0000  ; Store start address x3000
